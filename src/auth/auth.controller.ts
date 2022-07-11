@@ -16,6 +16,6 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
   async login() {
-    return null;
+    return 'Login successfully';
   }
 }
