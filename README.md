@@ -17,6 +17,10 @@ $ npm install
 $ npx prisma init
 ```
 
+```bash
+$ npx prisma migrate dev
+```
+
 # .Env
 
 Fallow .env.example file to set up the JWT secret and database connection.
