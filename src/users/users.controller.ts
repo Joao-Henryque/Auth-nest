@@ -2,7 +2,10 @@ import {
   Body,
   ConflictException,
   Controller,
+  Get,
   HttpStatus,
+  NotFoundException,
+  Param,
   Post,
   Res,
 } from '@nestjs/common';
@@ -23,5 +26,18 @@ export class UsersController {
     }
 
     return response.status(HttpStatus.CREATED).end();
+  }
+
+  @Get(':email')
+  async findOne(@Res() response: Response, @Param('email') email: string) {
+    const result = await this.usersService.getByEmail(email);
+
+    if (result instanceof NotFoundException) {
+      return response
+        .status(HttpStatus.EXPECTATION_FAILED)
+        .json(result.message);
+    }
+
+    return response.status(HttpStatus.OK).json(result);
   }
 }
